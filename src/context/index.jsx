@@ -4,6 +4,8 @@ import { AddTransContext } from "./AddTransacContext";
 import AddTransProvider from "./AddTransacContext";
 import { FormErrorContext } from "./ErrorFormContext";
 import FormErrorProvider from "./ErrorFormContext";
+import { NavbarContext } from "./NavbarContext";
+import NavbarProvider from "./NavbarContext";
 
 export {
   TransacContext,
@@ -12,4 +14,6 @@ export {
   AddTransProvider,
   FormErrorContext,
   FormErrorProvider,
+  NavbarContext,
+  NavbarProvider,
 };

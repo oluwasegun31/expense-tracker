@@ -2,11 +2,13 @@ import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { AddExpense } from "../components";
 import { useContext } from "react";
-import { AddTransContext } from "../context";
+import { AddTransContext, NavbarContext } from "../context";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function RootLayout() {
   // add transaction context
   const { setIsOpen } = useContext(AddTransContext);
+  const { isVisible, setisVisible } = useContext(NavbarContext);
 
   return (
     <>
@@ -18,15 +20,20 @@ export default function RootLayout() {
               alt="logo"
               className="md:w-9 w-6 md:h-9 h-6 object-contain"
             />
-            <p>Expense Tracker</p>
+            <p className="md:block hidden">Expense Tracker</p>
           </div>
 
-          <div className="flex justify-start items-center gap-8 text-[20px] font-semibold w-[15%]">
+          <div
+            className={`flex sm:flex-row flex-col justify-start items-center gap-8 text-[20px] font-semibold sm:w-[15%] w-[200px] sm:shadow-none shadow-md sm:p-0 px-4 py-10 sm:bg-inherit bg-white sm:relative fixed sm:top-auto top-20 sm:right-auto transition-all duration-300 ${
+              isVisible ? "right-5" : "-right-full"
+            }`}
+          >
             <NavLink
               to={"/"}
               className={({ isActive }) =>
                 isActive ? "text-green-700" : "text-black"
               }
+              onClick={() => setisVisible((val) => !val)}
             >
               Home
             </NavLink>
@@ -35,17 +42,24 @@ export default function RootLayout() {
               className={({ isActive }) =>
                 isActive ? "text-green-700" : "text-black"
               }
+              onClick={() => setisVisible((val) => !val)}
             >
               History
             </NavLink>
           </div>
           <div>
             <button
-              className="px-3 py-1 bg-green-700 text-white text-lg font-semibold hover:bg-green-500 transition duration-300"
+              className="px-3 py-1 bg-green-700 text-white sm:text-lg text-base font-semibold hover:bg-green-500 transition duration-300"
               onClick={() => setIsOpen(true)}
             >
               Add Expense
             </button>
+          </div>
+          <div
+            className="text-3xl leading-[1] sm:hidden block cursor-pointer"
+            onClick={() => setisVisible((val) => !val)}
+          >
+            <RxHamburgerMenu />
           </div>
         </nav>
       </header>
