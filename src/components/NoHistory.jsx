@@ -1,4 +1,4 @@
-import Money3D from "../assets/money3D.PNG";
+import Money3D from "../assets/money3D.png";
 
 export default function NoHistory({ text }) {
   return (
