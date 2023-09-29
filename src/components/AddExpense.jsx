@@ -10,9 +10,10 @@ export default function AddExpense() {
   const { addExpense } = useContext(TransacContext);
   // form error context
   const { setIsError } = useContext(FormErrorContext);
-  // title and amount ref
+  // title, amount and select ref
   const titleRef = useRef();
   const amountRef = useRef();
+  const selectRef = useRef();
   // Function to generate random chracters with letters an number to generate ID
   const generateRandomID = (length) => {
     const characters =
@@ -26,10 +27,19 @@ export default function AddExpense() {
   };
   // submit form function
   const submitForm = () => {
-    // get title and amount
+    // get title, amount and select
     const title = titleRef.current.value;
-    const amount = parseFloat(amountRef.current.value);
-    if (title === "" || amountRef.current.value === "") {
+    const amountVal = parseFloat(amountRef.current.value);
+    const select = selectRef.current.value;
+    // add the sign for income or expense
+    let amount;
+    if (select === "income") {
+      amount = +amountVal;
+    } else if (select === "expense") {
+      amount = -amountVal;
+    }
+
+    if (title === "" || amountRef.current.value === "" || select === "") {
       setIsError(true);
       return setTimeout(() => setIsError(false), 3000);
     } else {
@@ -44,6 +54,7 @@ export default function AddExpense() {
       // set all fields to empty
       titleRef.current.value = "";
       amountRef.current.value = "";
+      selectRef.current.value = "";
     }
     setIsOpen(false);
   };
@@ -69,17 +80,39 @@ export default function AddExpense() {
           </h4>
           <input
             type="text"
+            name="text"
             className="border-b w-full sm:text-2xl text-[20px] font-medium px-4 outline-none mb-8"
             placeholder="Title"
             maxLength={12}
             ref={titleRef}
           />
+
           <input
             type="number"
-            className="border-b w-full sm:text-2xl text-[20px] font-medium px-4 outline-none"
+            name="number"
+            className="border-b w-full sm:text-2xl text-[20px] font-medium px-4 outline-none mb-4"
             placeholder="Amount"
             ref={amountRef}
           />
+          <div className="px-4 mb-1 flex justify-start items-center gap-3">
+            <label htmlFor="select" className="text-lg font-medium">
+              Income or Expense:
+            </label>
+            <select
+              title="select"
+              className="w-[160px] sm:text-[22px] text-lg font-medium py-2 outline-none cursor-pointer border-b border-b-slate-400"
+              name="select"
+              ref={selectRef}
+            >
+              <option value="" className="text-gray-500"></option>
+              <option value="income" className="font-medium">
+                Income
+              </option>
+              <option value="expense" className="font-medium">
+                Expense
+              </option>
+            </select>
+          </div>
           <button
             type="button"
             className="w-full py-3 bg-green-500 text-white font-bold mt-8 sm:text-[22px] text-lg"

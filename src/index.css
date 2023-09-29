@@ -1,9 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
+
+body {
     max-width: 1400px;
     margin: 0 auto;
     background-color: #f5f5f5;
     position: relative;
+}
+
+input,
+textarea,
+button,
+select,
+svg,
+img,
+div,
+section {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a:focus,
+a:visited,
+a:active {
+    outline: none;
 }
