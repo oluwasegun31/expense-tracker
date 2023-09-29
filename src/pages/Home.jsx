@@ -21,20 +21,24 @@ export default function HomePage() {
       <IncomeExp />
       <div className="mx-auto sm:w-auto w-full">
         <section className="mt-6">
-          <h4 className="md:text-3xl text-[22px] font-medium flex justify-start items-center gap-2">
+          <h4 className="md:text-3xl text-[22px] font-medium flex justify-center items-center gap-2">
             <p>Recent</p>
             <RxCountdownTimer className="text-[22px] text-gray-500" />
           </h4>
           <div className="flex flex-col justify-start items-start gap-1">
-            {expense.map((transaction, pos) => {
-              return (
-                <RecentTrans
-                  key={transaction.id}
-                  transaction={transaction}
-                  pos={pos}
-                />
-              );
-            })}
+            {expense.length === 0 ? (
+              <p className="text-lg font-medium">No Recent Transaction</p>
+            ) : (
+              expense.map((transaction, pos) => {
+                return (
+                  <RecentTrans
+                    key={transaction.id}
+                    transaction={transaction}
+                    pos={pos}
+                  />
+                );
+              })
+            )}
           </div>
         </section>
       </div>

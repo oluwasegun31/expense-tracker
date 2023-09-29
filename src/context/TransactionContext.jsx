@@ -1,11 +1,7 @@
 import { createContext, useReducer } from "react";
 
 // initial state
-const initialState = [
-  { id: 1, title: "Salary", amount: 45000 },
-  { id: 2, title: "Diapers", amount: -12000 },
-  { id: 3, title: "FoodStuff", amount: -22000 },
-];
+const initialState = [];
 // Transaction context
 export const TransacContext = createContext(initialState);
 
